@@ -28,7 +28,12 @@ final class PromotionsViewController: UIViewController, PromotionsViewProtocol {
     }()
     
     private let collectionView: UICollectionView = {
-        let collection = UICollectionView(frame: CGRect(), collectionViewLayout: UICollectionViewFlowLayout())
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = UICollectionViewFlowLayout.automaticSize
+        layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        let collection = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+        collection.register(PromotionCollectionViewCell.self, forCellWithReuseIdentifier: "PromotionCollectionViewCell")
+        collection.backgroundColor = .white
         return collection
     }()
     
@@ -38,6 +43,7 @@ final class PromotionsViewController: UIViewController, PromotionsViewProtocol {
         button.setTitle("Выбрать", for: .normal)
         button.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
         button.tintColor = .white
+        button.addTarget(nil, action: #selector(chooseButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -52,15 +58,37 @@ final class PromotionsViewController: UIViewController, PromotionsViewProtocol {
         setupChooseButtonPosition()
         setupCollectionViewPosition()
         
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        
         presenter.configureView()
+    }
+    
+    func updateCollectionView() {
+        collectionView.reloadData()
+    }
+    
+    func setPromotionInfo(_ promotionInfo: PromotionInfoViewModel) {
+        titleLabel.text = promotionInfo.title
+        chooseButton.setTitle(promotionInfo.actionTitle, for: .normal)
+    }
+    
+    func showAlert(title: String, description: String) {
+        let alert = UIAlertController(title: title, message: description, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    @objc private func chooseButtonTapped() {
+        presenter.chooseButtonTapped(row: 0)
     }
     
     private func setupCloseButtonPosition() {
         view.addSubview(closeButton)
         closeButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            closeButton.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor, constant: 0),
-            closeButton.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 0),
+            closeButton.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+            closeButton.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
             closeButton.widthAnchor.constraint(equalToConstant: 24),
             closeButton.heightAnchor.constraint(equalToConstant: 24)
         ])
@@ -71,8 +99,8 @@ final class PromotionsViewController: UIViewController, PromotionsViewProtocol {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: closeButton.bottomAnchor, constant: 30),
-            titleLabel.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor, constant: 0),
-            titleLabel.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: 0)
+            titleLabel.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+            titleLabel.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor)
         ])
     }
     
@@ -81,8 +109,8 @@ final class PromotionsViewController: UIViewController, PromotionsViewProtocol {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 30),
-            collectionView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor, constant: 0),
-            collectionView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: 0),
+            collectionView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: chooseButton.topAnchor, constant: -30)
         ])
     }
@@ -91,10 +119,30 @@ final class PromotionsViewController: UIViewController, PromotionsViewProtocol {
         view.addSubview(chooseButton)
         chooseButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            chooseButton.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: 0),
-            chooseButton.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor, constant: 0),
-            chooseButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: 0),
+            chooseButton.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor),
+            chooseButton.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+            chooseButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
             chooseButton.heightAnchor.constraint(equalToConstant: 50)
         ])
+    }
+}
+
+extension PromotionsViewController: UICollectionViewDelegateFlowLayout {}
+
+extension PromotionsViewController: UICollectionViewDelegate {}
+
+extension PromotionsViewController: UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        presenter.getPromotionsCount()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PromotionCollectionViewCell",
+                                                            for: indexPath) as? PromotionCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+        cell.configureCell(with: presenter.getPromotion(for: indexPath.row))
+        return cell
     }
 }

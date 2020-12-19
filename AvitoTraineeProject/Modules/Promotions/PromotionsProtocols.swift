@@ -8,11 +8,16 @@
 import UIKit
 
 protocol PromotionsViewProtocol: class {
-    
+    func updateCollectionView()
+    func setPromotionInfo(_ promotionInfo: PromotionInfoViewModel)
+    func showAlert(title: String, description: String)
 }
 
 protocol PromotionsPresenterProtocol: class {
     func configureView()
+    func chooseButtonTapped(row: Int)
+    func getPromotionsCount() -> Int
+    func getPromotion(for row: Int) -> PromotionViewModel
 }
 
 protocol PromotionsInteractorProtocol: class {
