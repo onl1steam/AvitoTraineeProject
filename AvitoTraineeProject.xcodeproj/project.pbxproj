@@ -10,9 +10,9 @@
 		925F160B258D8BE700C43AFB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925F160A258D8BE700C43AFB /* AppDelegate.swift */; };
 		925F160D258D8BE700C43AFB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925F160C258D8BE700C43AFB /* SceneDelegate.swift */; };
 		925F160F258D8BE700C43AFB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925F160E258D8BE700C43AFB /* ViewController.swift */; };
-		925F1612258D8BE700C43AFB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 925F1610258D8BE700C43AFB /* Main.storyboard */; };
 		925F1614258D8BE900C43AFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 925F1613258D8BE900C43AFB /* Assets.xcassets */; };
 		925F1617258D8BE900C43AFB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 925F1615258D8BE900C43AFB /* LaunchScreen.storyboard */; };
+		92A2E85B258E3C4000535526 /* result.json in Resources */ = {isa = PBXBuildFile; fileRef = 92A2E85A258E3C4000535526 /* result.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,10 +20,10 @@
 		925F160A258D8BE700C43AFB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		925F160C258D8BE700C43AFB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		925F160E258D8BE700C43AFB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		925F1611258D8BE700C43AFB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		925F1613258D8BE900C43AFB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		925F1616258D8BE900C43AFB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		925F1618258D8BE900C43AFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		92A2E85A258E3C4000535526 /* result.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = result.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +41,7 @@
 			isa = PBXGroup;
 			children = (
 				925F1609258D8BE700C43AFB /* AvitoTraineeProject */,
+				925F1613258D8BE900C43AFB /* Assets.xcassets */,
 				925F1608258D8BE700C43AFB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -56,15 +57,22 @@
 		925F1609258D8BE700C43AFB /* AvitoTraineeProject */ = {
 			isa = PBXGroup;
 			children = (
+				925F160E258D8BE700C43AFB /* ViewController.swift */,
+				92A2E858258E3A6A00535526 /* Helpers */,
+			);
+			path = AvitoTraineeProject;
+			sourceTree = "<group>";
+		};
+		92A2E858258E3A6A00535526 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				92A2E85A258E3C4000535526 /* result.json */,
 				925F160A258D8BE700C43AFB /* AppDelegate.swift */,
 				925F160C258D8BE700C43AFB /* SceneDelegate.swift */,
-				925F160E258D8BE700C43AFB /* ViewController.swift */,
-				925F1610258D8BE700C43AFB /* Main.storyboard */,
-				925F1613258D8BE900C43AFB /* Assets.xcassets */,
 				925F1615258D8BE900C43AFB /* LaunchScreen.storyboard */,
 				925F1618258D8BE900C43AFB /* Info.plist */,
 			);
-			path = AvitoTraineeProject;
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,8 +133,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				925F1617258D8BE900C43AFB /* LaunchScreen.storyboard in Resources */,
+				92A2E85B258E3C4000535526 /* result.json in Resources */,
 				925F1614258D8BE900C43AFB /* Assets.xcassets in Resources */,
-				925F1612258D8BE700C43AFB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,14 +154,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		925F1610258D8BE700C43AFB /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				925F1611258D8BE700C43AFB /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		925F1615258D8BE900C43AFB /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -288,7 +288,8 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7UHA847YA4;
-				INFOPLIST_FILE = AvitoTraineeProject/Info.plist;
+				INFOPLIST_FILE = AvitoTraineeProject/Helpers/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -307,7 +308,8 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7UHA847YA4;
-				INFOPLIST_FILE = AvitoTraineeProject/Info.plist;
+				INFOPLIST_FILE = AvitoTraineeProject/Helpers/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
