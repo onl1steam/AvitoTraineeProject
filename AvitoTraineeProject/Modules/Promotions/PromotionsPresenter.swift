@@ -16,4 +16,15 @@ final class PromotionsPresenter: PromotionsPresenterProtocol {
     required init(view: PromotionsViewProtocol) {
         self.view = view
     }
+    
+    func configureView() {
+        interactor.getPromotions { promotionsInfo in
+            switch promotionsInfo {
+            case .success(let response):
+                print(response)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
 }

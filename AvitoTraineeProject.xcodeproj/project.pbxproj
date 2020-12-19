@@ -13,7 +13,6 @@
 		925F1617258D8BE900C43AFB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 925F1615258D8BE900C43AFB /* LaunchScreen.storyboard */; };
 		92A2E85B258E3C4000535526 /* result.json in Resources */ = {isa = PBXBuildFile; fileRef = 92A2E85A258E3C4000535526 /* result.json */; };
 		92A2E862258E3D7000535526 /* PromotionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A2E860258E3D7000535526 /* PromotionsViewController.swift */; };
-		92A2E863258E3D7000535526 /* PromotionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92A2E861258E3D7000535526 /* PromotionsViewController.xib */; };
 		92A2E867258E43BB00535526 /* PromotionsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A2E866258E43BB00535526 /* PromotionsProtocols.swift */; };
 		92A2E86A258E445800535526 /* PromotionsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A2E869258E445800535526 /* PromotionsPresenter.swift */; };
 		92A2E86D258E447700535526 /* PromotionsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A2E86C258E447700535526 /* PromotionsConfigurator.swift */; };
@@ -22,6 +21,7 @@
 		92A2E87F258E46FC00535526 /* PromotionsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A2E87E258E46FC00535526 /* PromotionsService.swift */; };
 		92A2E884258E4ABA00535526 /* Promotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A2E883258E4ABA00535526 /* Promotion.swift */; };
 		92A2E887258E4ACD00535526 /* PromotionsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A2E886258E4ACD00535526 /* PromotionsResponse.swift */; };
+		92A2E88B258E5EC600535526 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A2E88A258E5EC600535526 /* RoundedButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,7 +33,6 @@
 		925F1618258D8BE900C43AFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		92A2E85A258E3C4000535526 /* result.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = result.json; sourceTree = "<group>"; };
 		92A2E860258E3D7000535526 /* PromotionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionsViewController.swift; sourceTree = "<group>"; };
-		92A2E861258E3D7000535526 /* PromotionsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PromotionsViewController.xib; sourceTree = "<group>"; };
 		92A2E866258E43BB00535526 /* PromotionsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionsProtocols.swift; sourceTree = "<group>"; };
 		92A2E869258E445800535526 /* PromotionsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionsPresenter.swift; sourceTree = "<group>"; };
 		92A2E86C258E447700535526 /* PromotionsConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionsConfigurator.swift; sourceTree = "<group>"; };
@@ -42,6 +41,7 @@
 		92A2E87E258E46FC00535526 /* PromotionsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionsService.swift; sourceTree = "<group>"; };
 		92A2E883258E4ABA00535526 /* Promotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Promotion.swift; sourceTree = "<group>"; };
 		92A2E886258E4ACD00535526 /* PromotionsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionsResponse.swift; sourceTree = "<group>"; };
+		92A2E88A258E5EC600535526 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +78,7 @@
 				92A2E882258E4AAF00535526 /* Entities */,
 				92A2E875258E44AB00535526 /* Services */,
 				92A2E85F258E3C9D00535526 /* Modules */,
+				92A2E889258E5E8F00535526 /* Views */,
 				92A2E858258E3A6A00535526 /* Helpers */,
 			);
 			path = AvitoTraineeProject;
@@ -98,7 +99,6 @@
 		92A2E85E258E3C9900535526 /* Promotions */ = {
 			isa = PBXGroup;
 			children = (
-				92A2E861258E3D7000535526 /* PromotionsViewController.xib */,
 				92A2E860258E3D7000535526 /* PromotionsViewController.swift */,
 				92A2E869258E445800535526 /* PromotionsPresenter.swift */,
 				92A2E870258E449400535526 /* PromotionsInteractor.swift */,
@@ -132,6 +132,14 @@
 				92A2E886258E4ACD00535526 /* PromotionsResponse.swift */,
 			);
 			path = Entities;
+			sourceTree = "<group>";
+		};
+		92A2E889258E5E8F00535526 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				92A2E88A258E5EC600535526 /* RoundedButton.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,7 +201,6 @@
 			files = (
 				925F1617258D8BE900C43AFB /* LaunchScreen.storyboard in Resources */,
 				92A2E85B258E3C4000535526 /* result.json in Resources */,
-				92A2E863258E3D7000535526 /* PromotionsViewController.xib in Resources */,
 				925F1614258D8BE900C43AFB /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -212,6 +219,7 @@
 				925F160B258D8BE700C43AFB /* AppDelegate.swift in Sources */,
 				92A2E87F258E46FC00535526 /* PromotionsService.swift in Sources */,
 				92A2E871258E449400535526 /* PromotionsInteractor.swift in Sources */,
+				92A2E88B258E5EC600535526 /* RoundedButton.swift in Sources */,
 				92A2E862258E3D7000535526 /* PromotionsViewController.swift in Sources */,
 				92A2E884258E4ABA00535526 /* Promotion.swift in Sources */,
 				92A2E86D258E447700535526 /* PromotionsConfigurator.swift in Sources */,

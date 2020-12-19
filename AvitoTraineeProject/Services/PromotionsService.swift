@@ -8,28 +8,30 @@
 import Foundation
 
 protocol PromotionsServiceProtocol {
-    
+    func fetchPromotions(completion: @escaping (Result<PromotionsInfoResponse,Error>) -> Void)
 }
 
 final class PromotionsService: PromotionsServiceProtocol {
     
-    func fetchPromotions() {
+    func fetchPromotions(completion: @escaping (Result<PromotionsInfoResponse,Error>) -> Void) {
         if let path = Bundle.main.path(forResource: "result", ofType: "json") {
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-                parsePromotions(from: data)
+                parsePromotions(from: data, completion: completion)
             } catch {
-                print("Error: \(error.localizedDescription)")
+                completion(.failure(error))
             }
         }
     }
     
-    private func parsePromotions(from jsonData: Data) {
+    private func parsePromotions(from jsonData: Data,
+                                 completion: @escaping (Result<PromotionsInfoResponse,Error>) -> Void) {
         do {
             let promotionsStatusResponse = try JSONDecoder().decode(PromotionsStatusResponse.self, from: jsonData)
-            print(promotionsStatusResponse.result)
+            let result = promotionsStatusResponse.result
+            completion(.success(result))
         } catch let error {
-            print("Error: \(error.localizedDescription)")
+            completion(.failure(error))
         }
     }
     

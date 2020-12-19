@@ -12,8 +12,13 @@ final class PromotionsInteractor: PromotionsInteractorProtocol {
     weak var presenter: PromotionsPresenterProtocol!
     let promotionsService: PromotionsServiceProtocol
     
-    required init(presenter: PromotionsPresenterProtocol, promotionsService: PromotionsServiceProtocol = PromotionsService()) {
+    required init(presenter: PromotionsPresenterProtocol,
+                  promotionsService: PromotionsServiceProtocol = PromotionsService()) {
         self.presenter = presenter
         self.promotionsService = promotionsService
+    }
+    
+    func getPromotions(completion: @escaping (Result<PromotionsInfoResponse,Error>) -> Void) {
+        promotionsService.fetchPromotions(completion: completion)
     }
 }

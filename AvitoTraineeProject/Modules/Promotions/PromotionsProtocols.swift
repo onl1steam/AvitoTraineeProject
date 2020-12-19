@@ -12,11 +12,11 @@ protocol PromotionsViewProtocol: class {
 }
 
 protocol PromotionsPresenterProtocol: class {
-    
+    func configureView()
 }
 
 protocol PromotionsInteractorProtocol: class {
-    
+    func getPromotions(completion: @escaping (Result<PromotionsInfoResponse,Error>) -> Void)
 }
 
 protocol PromotionsRouterProtocol: class {
