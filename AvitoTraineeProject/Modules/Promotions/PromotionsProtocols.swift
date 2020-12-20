@@ -11,11 +11,14 @@ protocol PromotionsViewProtocol: class {
     func updateCollectionView()
     func setPromotionInfo(_ promotionInfo: PromotionInfoViewModel)
     func showAlert(title: String, description: String)
+    func changeButtonTitle(_ title: String)
 }
 
 protocol PromotionsPresenterProtocol: class {
+    var selectedPromoNumber: Int? { get }
     func configureView()
-    func chooseButtonTapped(row: Int)
+    func chooseButtonTapped()
+    func cellTapped(row: Int?)
     func getPromotionsCount() -> Int
     func getPromotion(for row: Int) -> PromotionViewModel
 }

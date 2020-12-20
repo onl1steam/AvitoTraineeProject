@@ -8,12 +8,14 @@
 import Foundation
 
 final class PromotionsPresenter: PromotionsPresenterProtocol {
-    
+
     weak var view: PromotionsViewProtocol!
     var interactor: PromotionsInteractorProtocol!
     var router: PromotionsRouterProtocol!
     
+    var promotionInfo: PromotionInfoViewModel?
     var promotions: [PromotionViewModel] = []
+    var selectedPromoNumber: Int?
     
     required init(view: PromotionsViewProtocol) {
         self.view = view
@@ -26,15 +28,32 @@ final class PromotionsPresenter: PromotionsPresenterProtocol {
             case .success(let response):
                 self.promotions = self.makePromotionViewModel(from: response.list)
                 self.view?.updateCollectionView()
-                self.view?.setPromotionInfo(self.makePromotioInfoViewModel(from: response))
+                let promoInfo = self.makePromotioInfoViewModel(from: response)
+                self.promotionInfo = promoInfo
+                self.view?.setPromotionInfo(promoInfo)
             case .failure(let error):
                 print(error.localizedDescription)
             }
         }
     }
     
-    func chooseButtonTapped(row: Int) {
-        view.showAlert(title: "Выбрана услуга", description: "Выбрана услуга: \(promotions[row].title)")
+    func cellTapped(row: Int?) {
+        guard let promInfo = promotionInfo else { return }
+        guard let number = row else {
+            selectedPromoNumber = nil
+            view.changeButtonTitle(promInfo.actionTitle)
+            return
+        }
+        view.changeButtonTitle(promInfo.selectedActionTitle)
+        selectedPromoNumber = number
+    }
+    
+    func chooseButtonTapped() {
+        guard let number = selectedPromoNumber else {
+            view.showAlert(title: "Выбор услуги", description: "Ни одна услуга не выбрана.")
+            return
+        }
+        view.showAlert(title: "Выбор услуги", description: "Выбрана услуга: \(promotions[number].title).")
     }
     
     func getPromotionsCount() -> Int {
@@ -51,8 +70,7 @@ final class PromotionsPresenter: PromotionsPresenterProtocol {
                                       title: promotion.title,
                                       description: promotion.description,
                                       iconUrl: promotion.icon.icon52Url,
-                                      price: promotion.price,
-                                      isSelected: promotion.isSelected)
+                                      price: promotion.price)
         }
     }
     

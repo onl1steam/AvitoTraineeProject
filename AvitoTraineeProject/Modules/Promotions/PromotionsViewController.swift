@@ -64,6 +64,10 @@ final class PromotionsViewController: UIViewController, PromotionsViewProtocol {
         presenter.configureView()
     }
     
+    func changeButtonTitle(_ title: String) {
+        chooseButton.setTitle(title, for: .normal)
+    }
+    
     func updateCollectionView() {
         collectionView.reloadData()
     }
@@ -80,7 +84,7 @@ final class PromotionsViewController: UIViewController, PromotionsViewProtocol {
     }
     
     @objc private func chooseButtonTapped() {
-        presenter.chooseButtonTapped(row: 0)
+        presenter.chooseButtonTapped()
     }
     
     private func setupCloseButtonPosition() {
@@ -129,7 +133,33 @@ final class PromotionsViewController: UIViewController, PromotionsViewProtocol {
 
 extension PromotionsViewController: UICollectionViewDelegateFlowLayout {}
 
-extension PromotionsViewController: UICollectionViewDelegate {}
+extension PromotionsViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let row = presenter.selectedPromoNumber else {
+            let cell = collectionView.cellForItem(at: indexPath) as? PromotionCollectionViewCell
+            cell?.changeCheckmarkVisibility(isHidden: false)
+            presenter.cellTapped(row: indexPath.row)
+            return
+        }
+        
+        let actualSelectedCellIndexPath = IndexPath(row: row, section: 0)
+        guard actualSelectedCellIndexPath != indexPath else {
+            let cell = collectionView.cellForItem(at: indexPath) as? PromotionCollectionViewCell
+            cell?.changeCheckmarkVisibility(isHidden: true)
+            presenter.cellTapped(row: nil)
+            return
+        }
+        
+        let previousCell = collectionView.cellForItem(at: actualSelectedCellIndexPath) as? PromotionCollectionViewCell
+        previousCell?.changeCheckmarkVisibility(isHidden: true)
+        
+        let cell = collectionView.cellForItem(at: indexPath) as? PromotionCollectionViewCell
+        cell?.changeCheckmarkVisibility(isHidden: false)
+        
+        presenter.cellTapped(row: indexPath.row)
+    }
+}
 
 extension PromotionsViewController: UICollectionViewDataSource {
     

@@ -23,6 +23,7 @@ final class PromotionCollectionViewCell: UICollectionViewCell {
     private let checkmarkImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "checkmark")
+        imageView.isHidden = true
         return imageView
     }()
     
@@ -73,6 +74,10 @@ final class PromotionCollectionViewCell: UICollectionViewCell {
             return
         }
         descriptionLabel.text = descriptionText
+    }
+    
+    func changeCheckmarkVisibility(isHidden: Bool) {
+        checkmarkImageView.isHidden = isHidden
     }
     
     private func setupBackgroundPosition() {

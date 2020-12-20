@@ -13,5 +13,4 @@ struct PromotionViewModel {
     var description: String?
     var iconUrl: String
     var price: String
-    var isSelected: Bool
 }
