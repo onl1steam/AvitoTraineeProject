@@ -8,7 +8,7 @@
 import Foundation
 
 final class PromotionsPresenter: PromotionsPresenterProtocol {
-
+    
     weak var view: PromotionsViewProtocol!
     var interactor: PromotionsInteractorProtocol!
     var router: PromotionsRouterProtocol!
@@ -19,6 +19,18 @@ final class PromotionsPresenter: PromotionsPresenterProtocol {
     
     required init(view: PromotionsViewProtocol) {
         self.view = view
+    }
+    
+    func getImage(row: Int, completion: @escaping (Data) -> Void) -> URLSessionDataTask? {
+        interactor.getImageData(urlString: promotions[row].iconUrl) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let data):
+                completion(data)
+            case .failure(let error):
+                self.view.showAlert(title: "Ошибка", description: error.localizedDescription)
+            }
+        }
     }
     
     func configureView() {

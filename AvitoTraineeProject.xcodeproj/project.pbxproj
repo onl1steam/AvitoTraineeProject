@@ -25,6 +25,7 @@
 		92A2E890258E973000535526 /* PromotionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A2E88F258E973000535526 /* PromotionCollectionViewCell.swift */; };
 		92A2E89D258EB4AD00535526 /* PromotionInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A2E89C258EB4AD00535526 /* PromotionInfoViewModel.swift */; };
 		92A2E8A0258EB4BE00535526 /* PromotionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A2E89F258EB4BE00535526 /* PromotionViewModel.swift */; };
+		92A2E8A4258ECCA500535526 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A2E8A3258ECCA500535526 /* ImageService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		92A2E88F258E973000535526 /* PromotionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionCollectionViewCell.swift; sourceTree = "<group>"; };
 		92A2E89C258EB4AD00535526 /* PromotionInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionInfoViewModel.swift; sourceTree = "<group>"; };
 		92A2E89F258EB4BE00535526 /* PromotionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionViewModel.swift; sourceTree = "<group>"; };
+		92A2E8A3258ECCA500535526 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				92A2E87E258E46FC00535526 /* PromotionsService.swift */,
+				92A2E8A3258ECCA500535526 /* ImageService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -230,6 +233,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				92A2E86A258E445800535526 /* PromotionsPresenter.swift in Sources */,
+				92A2E8A4258ECCA500535526 /* ImageService.swift in Sources */,
 				92A2E887258E4ACD00535526 /* PromotionsResponse.swift in Sources */,
 				92A2E8A0258EB4BE00535526 /* PromotionViewModel.swift in Sources */,
 				92A2E87B258E463800535526 /* PromotionsRouter.swift in Sources */,

@@ -21,10 +21,12 @@ protocol PromotionsPresenterProtocol: class {
     func cellTapped(row: Int?)
     func getPromotionsCount() -> Int
     func getPromotion(for row: Int) -> PromotionViewModel
+    func getImage(row: Int, completion: @escaping (Data) -> Void) -> URLSessionDataTask?
 }
 
 protocol PromotionsInteractorProtocol: class {
     func getPromotions(completion: @escaping (Result<PromotionsInfoResponse,Error>) -> Void)
+    func getImageData(urlString: String, completion: @escaping (Result<Data, Error>) -> Void) -> URLSessionDataTask?
 }
 
 protocol PromotionsRouterProtocol: class {

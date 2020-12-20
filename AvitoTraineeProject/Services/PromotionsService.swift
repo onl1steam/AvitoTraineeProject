@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol PromotionsServiceProtocol {
+protocol PromotionsServiceProtocol: class {
     func fetchPromotions(completion: @escaping (Result<PromotionsInfoResponse,Error>) -> Void)
 }
 

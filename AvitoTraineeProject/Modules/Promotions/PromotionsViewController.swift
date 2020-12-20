@@ -173,6 +173,14 @@ extension PromotionsViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         cell.configureCell(with: presenter.getPromotion(for: indexPath.row))
+        cell.dataTask = presenter.getImage(row: indexPath.row, completion: { data in
+            DispatchQueue.global().async {
+                let image = UIImage(data: data)
+                DispatchQueue.main.async {
+                    cell.setImage(image)
+                }
+            }
+        })
         return cell
     }
 }

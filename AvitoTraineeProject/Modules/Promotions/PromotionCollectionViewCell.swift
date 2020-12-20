@@ -9,6 +9,8 @@ import UIKit
 
 final class PromotionCollectionViewCell: UICollectionViewCell {
     
+    var dataTask: URLSessionDataTask?
+    
     private let background: UIView = {
         let view = UIView()
         view.backgroundColor = .lightGray
@@ -64,6 +66,15 @@ final class PromotionCollectionViewCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        dataTask?.cancel()
+    }
+    
+    func setImage(_ image: UIImage?) {
+        promotionImageView.image = image
     }
     
     func configureCell(with promotion: PromotionViewModel) {
