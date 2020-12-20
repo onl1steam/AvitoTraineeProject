@@ -32,7 +32,6 @@ final class PromotionCollectionViewCell: UICollectionViewCell {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
-        label.text = "XL-объявление"
         label.numberOfLines = 0
         return label
     }()
@@ -40,7 +39,6 @@ final class PromotionCollectionViewCell: UICollectionViewCell {
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 18, weight: .regular)
-        label.text = "Пользователи смогут посмотреть фотографии, описание и телефон прямо из результатов поиска."
         label.numberOfLines = 0
         return label
     }()
@@ -48,7 +46,6 @@ final class PromotionCollectionViewCell: UICollectionViewCell {
     private let priceLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 20, weight: .medium)
-        label.text = "356 ₽"
         label.numberOfLines = 0
         return label
     }()
@@ -157,5 +154,4 @@ final class PromotionCollectionViewCell: UICollectionViewCell {
             priceLabel.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor, constant: 0)
         ])
     }
-    
 }

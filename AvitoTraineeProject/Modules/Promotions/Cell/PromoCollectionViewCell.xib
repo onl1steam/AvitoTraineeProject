@@ -78,6 +78,7 @@
                 <outlet property="priceLabel" destination="P3J-9b-la5" id="mvA-ph-J0p"/>
                 <outlet property="promotionImageView" destination="eVz-Np-7Uv" id="Kr2-Nf-RaA"/>
                 <outlet property="titleLabel" destination="pRk-bj-O3t" id="AUx-qA-GJn"/>
+                <outlet property="widthConstraint" destination="uPy-mS-z7M" id="Fkq-mF-A80"/>
             </connections>
             <point key="canvasLocation" x="97.826086956521749" y="124.55357142857142"/>
         </collectionViewCell>

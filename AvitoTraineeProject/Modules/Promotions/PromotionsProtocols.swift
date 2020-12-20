@@ -8,7 +8,7 @@
 import UIKit
 
 protocol PromotionsViewProtocol: class {
-    func updateCollectionView()
+    func updateCollectionView(with promotionList: [PromotionViewModel])
     func setPromotionInfo(_ promotionInfo: PromotionInfoViewModel)
     func showAlert(title: String, description: String)
     func changeButtonTitle(_ title: String)

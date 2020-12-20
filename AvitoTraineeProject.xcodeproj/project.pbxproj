@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		922355D0258FFDBA003D66FD /* PromotionsCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922355CF258FFDBA003D66FD /* PromotionsCollectionDataSource.swift */; };
 		925F160B258D8BE700C43AFB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925F160A258D8BE700C43AFB /* AppDelegate.swift */; };
 		925F160D258D8BE700C43AFB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925F160C258D8BE700C43AFB /* SceneDelegate.swift */; };
 		925F1614258D8BE900C43AFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 925F1613258D8BE900C43AFB /* Assets.xcassets */; };
@@ -31,6 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		922355CF258FFDBA003D66FD /* PromotionsCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionsCollectionDataSource.swift; sourceTree = "<group>"; };
 		925F1607258D8BE700C43AFB /* AvitoTraineeProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AvitoTraineeProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		925F160A258D8BE700C43AFB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		925F160C258D8BE700C43AFB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 				92A2E875258E44AB00535526 /* Services */,
 				92A2E85F258E3C9D00535526 /* Modules */,
 				92A2E889258E5E8F00535526 /* Views */,
+				92A2E882258E4AAF00535526 /* Entities */,
 				92A2E858258E3A6A00535526 /* Helpers */,
 			);
 			path = AvitoTraineeProject;
@@ -111,8 +114,8 @@
 			isa = PBXGroup;
 			children = (
 				92A2E8A6258ED29300535526 /* Cell */,
-				92A2E882258E4AAF00535526 /* Entities */,
 				92A2E89B258EB48900535526 /* ViewModels */,
+				922355CF258FFDBA003D66FD /* PromotionsCollectionDataSource.swift */,
 				92A2E88F258E973000535526 /* PromotionCollectionViewCell.swift */,
 				92A2E860258E3D7000535526 /* PromotionsViewController.swift */,
 				92A2E869258E445800535526 /* PromotionsPresenter.swift */,
@@ -251,6 +254,7 @@
 				92A2E8A4258ECCA500535526 /* ImageService.swift in Sources */,
 				92A2E887258E4ACD00535526 /* PromotionsResponse.swift in Sources */,
 				92A2E8A0258EB4BE00535526 /* PromotionViewModel.swift in Sources */,
+				922355D0258FFDBA003D66FD /* PromotionsCollectionDataSource.swift in Sources */,
 				92A2E87B258E463800535526 /* PromotionsRouter.swift in Sources */,
 				92A2E867258E43BB00535526 /* PromotionsProtocols.swift in Sources */,
 				925F160B258D8BE700C43AFB /* AppDelegate.swift in Sources */,

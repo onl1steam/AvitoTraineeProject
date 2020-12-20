@@ -9,11 +9,14 @@ import UIKit
 
 class PromoCollectionViewCell: UICollectionViewCell {
     
+    static let reuseIdentifier = "PromoCollectionViewCell"
+    
     @IBOutlet weak var promotionImageView: UIImageView!
     @IBOutlet weak var checkmarkImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var widthConstraint: NSLayoutConstraint!
     
     var dataTask: URLSessionDataTask?
     
@@ -21,6 +24,7 @@ class PromoCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         backgroundColor = #colorLiteral(red: 0.9725490196, green: 0.9725490196, blue: 0.9725490196, alpha: 1)
         layer.cornerRadius = 8
+        widthConstraint.constant = UIScreen.main.bounds.width - 40 - 50 - 24 - 40
     }
     
     override func prepareForReuse() {

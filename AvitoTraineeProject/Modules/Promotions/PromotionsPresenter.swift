@@ -22,13 +22,9 @@ final class PromotionsPresenter: PromotionsPresenterProtocol {
     }
     
     func getImage(row: Int, completion: @escaping (Data) -> Void) -> URLSessionDataTask? {
-        interactor.getImageData(urlString: promotions[row].iconUrl) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let data):
+        interactor.getImageData(urlString: promotions[row].iconUrl) { result in
+            if case .success(let data) = result {
                 completion(data)
-            case .failure(let error):
-                self.view.showAlert(title: "Ошибка", description: error.localizedDescription)
             }
         }
     }
@@ -39,7 +35,7 @@ final class PromotionsPresenter: PromotionsPresenterProtocol {
             switch promotionsInfo {
             case .success(let response):
                 self.promotions = self.makePromotionViewModel(from: response.list)
-                self.view?.updateCollectionView()
+                self.view?.updateCollectionView(with: self.promotions)
                 let promoInfo = self.makePromotioInfoViewModel(from: response)
                 self.promotionInfo = promoInfo
                 self.view?.setPromotionInfo(promoInfo)
