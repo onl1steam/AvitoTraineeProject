@@ -35,12 +35,7 @@ class PromoCollectionViewCell: UICollectionViewCell {
     func configureCell(with promotion: PromotionViewModel) {
         titleLabel.text = promotion.title
         priceLabel.text = promotion.price
-        guard let descriptionText = promotion.description else {
-            descriptionLabel.isHidden = true
-            return
-        }
-        descriptionLabel.isHidden = false
-        descriptionLabel.text = descriptionText
+        descriptionLabel.text = promotion.description
     }
     
     func changeCheckmarkVisibility(isHidden: Bool) {

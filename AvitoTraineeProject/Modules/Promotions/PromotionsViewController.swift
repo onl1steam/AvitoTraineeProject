@@ -120,7 +120,7 @@ final class PromotionsViewController: UIViewController, PromotionsViewProtocol {
             collectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 30),
             collectionView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: chooseButton.topAnchor, constant: -30)
+            collectionView.bottomAnchor.constraint(equalTo: chooseButton.topAnchor, constant: -20)
         ])
     }
     
@@ -128,7 +128,7 @@ final class PromotionsViewController: UIViewController, PromotionsViewProtocol {
         view.addSubview(chooseButton)
         chooseButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            chooseButton.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor),
+            chooseButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
             chooseButton.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
             chooseButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
             chooseButton.heightAnchor.constraint(equalToConstant: 50)
@@ -183,6 +183,11 @@ extension PromotionsViewController: UICollectionViewDataSource {
                 }
             }
         })
+        if let selectedRow = presenter.selectedPromoNumber, indexPath.row == selectedRow {
+            cell.changeCheckmarkVisibility(isHidden: false)
+        } else {
+            cell.changeCheckmarkVisibility(isHidden: true)
+        }
         return cell
     }
 }
