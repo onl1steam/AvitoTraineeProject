@@ -12,6 +12,8 @@ final class PromotionsViewController: UIViewController, PromotionsViewProtocol {
     var configurator: PromotionsConfiguratorProtocol = PromotionsConfigurator()
     var presenter: PromotionsPresenterProtocol!
     
+    private var selectedCell: PromoCollectionViewCell?
+    
     private let closeButton: UIButton = {
         let button = UIButton()
         button.setBackgroundImage(UIImage(named: "CloseIconTemplate"), for: .normal)
@@ -32,7 +34,10 @@ final class PromotionsViewController: UIViewController, PromotionsViewProtocol {
         layout.itemSize = UICollectionViewFlowLayout.automaticSize
         layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         let collection = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        collection.register(PromotionCollectionViewCell.self, forCellWithReuseIdentifier: "PromotionCollectionViewCell")
+        let nib = UINib(nibName: "PromoCollectionViewCell", bundle: nil)
+        collection.register(nib, forCellWithReuseIdentifier: "PromoCollectionViewCell")
+        collection.showsHorizontalScrollIndicator = false
+        collection.showsVerticalScrollIndicator = false
         collection.backgroundColor = .white
         return collection
     }()
@@ -41,7 +46,7 @@ final class PromotionsViewController: UIViewController, PromotionsViewProtocol {
         let button = RoundedButton()
         button.cornerRadius = 8
         button.setTitle("Выбрать", for: .normal)
-        button.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.003921568627, green: 0.6745098039, blue: 1, alpha: 1)
         button.tintColor = .white
         button.addTarget(nil, action: #selector(chooseButtonTapped), for: .touchUpInside)
         return button
@@ -136,27 +141,24 @@ extension PromotionsViewController: UICollectionViewDelegateFlowLayout {}
 extension PromotionsViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as? PromoCollectionViewCell
         guard let row = presenter.selectedPromoNumber else {
-            let cell = collectionView.cellForItem(at: indexPath) as? PromotionCollectionViewCell
             cell?.changeCheckmarkVisibility(isHidden: false)
+            selectedCell = cell
             presenter.cellTapped(row: indexPath.row)
             return
         }
         
-        let actualSelectedCellIndexPath = IndexPath(row: row, section: 0)
-        guard actualSelectedCellIndexPath != indexPath else {
-            let cell = collectionView.cellForItem(at: indexPath) as? PromotionCollectionViewCell
+        guard row != indexPath.row else {
             cell?.changeCheckmarkVisibility(isHidden: true)
+            selectedCell = cell
             presenter.cellTapped(row: nil)
             return
         }
         
-        let previousCell = collectionView.cellForItem(at: actualSelectedCellIndexPath) as? PromotionCollectionViewCell
-        previousCell?.changeCheckmarkVisibility(isHidden: true)
-        
-        let cell = collectionView.cellForItem(at: indexPath) as? PromotionCollectionViewCell
+        selectedCell?.changeCheckmarkVisibility(isHidden: true)
         cell?.changeCheckmarkVisibility(isHidden: false)
-        
+        selectedCell = cell
         presenter.cellTapped(row: indexPath.row)
     }
 }
@@ -168,8 +170,8 @@ extension PromotionsViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PromotionCollectionViewCell",
-                                                            for: indexPath) as? PromotionCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PromoCollectionViewCell",
+                                                            for: indexPath) as? PromoCollectionViewCell else {
             return UICollectionViewCell()
         }
         cell.configureCell(with: presenter.getPromotion(for: indexPath.row))

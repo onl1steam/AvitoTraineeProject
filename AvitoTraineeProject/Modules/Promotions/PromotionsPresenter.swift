@@ -56,8 +56,8 @@ final class PromotionsPresenter: PromotionsPresenterProtocol {
             view.changeButtonTitle(promInfo.actionTitle)
             return
         }
-        view.changeButtonTitle(promInfo.selectedActionTitle)
         selectedPromoNumber = number
+        view.changeButtonTitle(promInfo.selectedActionTitle)
     }
     
     func chooseButtonTapped() {
