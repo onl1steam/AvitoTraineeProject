@@ -12,7 +12,7 @@ final class PromotionsViewController: UIViewController, PromotionsViewProtocol {
     var configurator: PromotionsConfiguratorProtocol = PromotionsConfigurator()
     var presenter: PromotionsPresenterProtocol!
     
-    private var selectedCell: PromoCollectionViewCell?
+    private var selectedCell: PromotionCollectionViewCell?
     private var dataSource: PromotionsCollectionDataSource?
     
     private let closeButton: UIButton = {
@@ -33,9 +33,16 @@ final class PromotionsViewController: UIViewController, PromotionsViewProtocol {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = UICollectionViewFlowLayout.automaticSize
         layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        
         let collection = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        let nib = UINib(nibName: "PromoCollectionViewCell", bundle: nil)
-        collection.register(nib, forCellWithReuseIdentifier: PromoCollectionViewCell.reuseIdentifier)
+        
+        
+        collection.register(PromotionCollectionViewCell.self,
+                            forCellWithReuseIdentifier: PromotionCollectionViewCell.reuseIdentifier)
+        
+        // let nib = UINib(nibName: "PromoCollectionViewCell", bundle: nil)
+        // collection.register(nib, forCellWithReuseIdentifier: PromoCollectionViewCell.reuseIdentifier)
+        
         collection.showsHorizontalScrollIndicator = false
         collection.showsVerticalScrollIndicator = false
         collection.backgroundColor = .white
@@ -129,7 +136,7 @@ final class PromotionsViewController: UIViewController, PromotionsViewProtocol {
         view.addSubview(chooseButton)
         chooseButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            chooseButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
+            chooseButton.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: -10),
             chooseButton.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
             chooseButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
             chooseButton.heightAnchor.constraint(equalToConstant: 50)
@@ -140,7 +147,7 @@ final class PromotionsViewController: UIViewController, PromotionsViewProtocol {
 extension PromotionsViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as? PromoCollectionViewCell
+        let cell = collectionView.cellForItem(at: indexPath) as? PromotionCollectionViewCell
         guard let row = presenter.selectedPromoNumber else {
             cell?.changeCheckmarkVisibility(isHidden: false)
             selectedCell = cell
@@ -159,5 +166,11 @@ extension PromotionsViewController: UICollectionViewDelegateFlowLayout, UICollec
         cell?.changeCheckmarkVisibility(isHidden: false)
         selectedCell = cell
         presenter.cellTapped(row: indexPath.row)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = collectionView.bounds.width
+        let size = CGSize(width: width, height: 150)
+        return size
     }
 }

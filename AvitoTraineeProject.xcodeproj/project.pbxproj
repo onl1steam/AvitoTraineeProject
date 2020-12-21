@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		922355D0258FFDBA003D66FD /* PromotionsCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922355CF258FFDBA003D66FD /* PromotionsCollectionDataSource.swift */; };
+		922355D625900CC0003D66FD /* CollectionViewReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922355D525900CC0003D66FD /* CollectionViewReusableCell.swift */; };
 		925F160B258D8BE700C43AFB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925F160A258D8BE700C43AFB /* AppDelegate.swift */; };
 		925F160D258D8BE700C43AFB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925F160C258D8BE700C43AFB /* SceneDelegate.swift */; };
 		925F1614258D8BE900C43AFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 925F1613258D8BE900C43AFB /* Assets.xcassets */; };
@@ -27,12 +28,11 @@
 		92A2E89D258EB4AD00535526 /* PromotionInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A2E89C258EB4AD00535526 /* PromotionInfoViewModel.swift */; };
 		92A2E8A0258EB4BE00535526 /* PromotionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A2E89F258EB4BE00535526 /* PromotionViewModel.swift */; };
 		92A2E8A4258ECCA500535526 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A2E8A3258ECCA500535526 /* ImageService.swift */; };
-		92A2E8A9258ED2A700535526 /* PromoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A2E8A7258ED2A700535526 /* PromoCollectionViewCell.swift */; };
-		92A2E8AA258ED2A700535526 /* PromoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92A2E8A8258ED2A700535526 /* PromoCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		922355CF258FFDBA003D66FD /* PromotionsCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionsCollectionDataSource.swift; sourceTree = "<group>"; };
+		922355D525900CC0003D66FD /* CollectionViewReusableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewReusableCell.swift; sourceTree = "<group>"; };
 		925F1607258D8BE700C43AFB /* AvitoTraineeProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AvitoTraineeProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		925F160A258D8BE700C43AFB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		925F160C258D8BE700C43AFB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -54,8 +54,6 @@
 		92A2E89C258EB4AD00535526 /* PromotionInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionInfoViewModel.swift; sourceTree = "<group>"; };
 		92A2E89F258EB4BE00535526 /* PromotionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionViewModel.swift; sourceTree = "<group>"; };
 		92A2E8A3258ECCA500535526 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
-		92A2E8A7258ED2A700535526 /* PromoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCollectionViewCell.swift; sourceTree = "<group>"; };
-		92A2E8A8258ED2A700535526 /* PromoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PromoCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +67,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		922355D425900CAB003D66FD /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				922355D525900CC0003D66FD /* CollectionViewReusableCell.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		925F15FE258D8BE700C43AFB = {
 			isa = PBXGroup;
 			children = (
@@ -93,6 +99,7 @@
 				92A2E85F258E3C9D00535526 /* Modules */,
 				92A2E889258E5E8F00535526 /* Views */,
 				92A2E882258E4AAF00535526 /* Entities */,
+				922355D425900CAB003D66FD /* Protocols */,
 				92A2E858258E3A6A00535526 /* Helpers */,
 			);
 			path = AvitoTraineeProject;
@@ -113,7 +120,6 @@
 		92A2E85E258E3C9900535526 /* Promotions */ = {
 			isa = PBXGroup;
 			children = (
-				92A2E8A6258ED29300535526 /* Cell */,
 				92A2E89B258EB48900535526 /* ViewModels */,
 				922355CF258FFDBA003D66FD /* PromotionsCollectionDataSource.swift */,
 				92A2E88F258E973000535526 /* PromotionCollectionViewCell.swift */,
@@ -168,15 +174,6 @@
 				92A2E89C258EB4AD00535526 /* PromotionInfoViewModel.swift */,
 			);
 			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		92A2E8A6258ED29300535526 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				92A2E8A7258ED2A700535526 /* PromoCollectionViewCell.swift */,
-				92A2E8A8258ED2A700535526 /* PromoCollectionViewCell.xib */,
-			);
-			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -236,7 +233,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				92A2E8AA258ED2A700535526 /* PromoCollectionViewCell.xib in Resources */,
 				925F1617258D8BE900C43AFB /* LaunchScreen.storyboard in Resources */,
 				92A2E85B258E3C4000535526 /* result.json in Resources */,
 				925F1614258D8BE900C43AFB /* Assets.xcassets in Resources */,
@@ -262,10 +258,10 @@
 				92A2E871258E449400535526 /* PromotionsInteractor.swift in Sources */,
 				92A2E88B258E5EC600535526 /* RoundedButton.swift in Sources */,
 				92A2E89D258EB4AD00535526 /* PromotionInfoViewModel.swift in Sources */,
+				922355D625900CC0003D66FD /* CollectionViewReusableCell.swift in Sources */,
 				92A2E862258E3D7000535526 /* PromotionsViewController.swift in Sources */,
 				92A2E884258E4ABA00535526 /* Promotion.swift in Sources */,
 				92A2E890258E973000535526 /* PromotionCollectionViewCell.swift in Sources */,
-				92A2E8A9258ED2A700535526 /* PromoCollectionViewCell.swift in Sources */,
 				92A2E86D258E447700535526 /* PromotionsConfigurator.swift in Sources */,
 				925F160D258D8BE700C43AFB /* SceneDelegate.swift in Sources */,
 			);

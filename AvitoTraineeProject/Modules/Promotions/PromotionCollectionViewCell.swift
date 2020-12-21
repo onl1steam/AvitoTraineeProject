@@ -7,15 +7,15 @@
 
 import UIKit
 
-final class PromotionCollectionViewCell: UICollectionViewCell {
+final class PromotionCollectionViewCell: UICollectionViewCell, CollectionViewReusableCell {
+    
+    private enum CellConstraints {
+        static let promotionImageView: CGFloat = 52
+        static let checkmarkImageView: CGFloat = 24
+        static let screenWidth: CGFloat = UIScreen.main.bounds.width
+    }
     
     var dataTask: URLSessionDataTask?
-    
-    private let background: UIView = {
-        let view = UIView()
-        view.backgroundColor = .lightGray
-        return view
-    }()
     
     private let promotionImageView: UIImageView = {
         let imageView = UIImageView()
@@ -38,27 +38,23 @@ final class PromotionCollectionViewCell: UICollectionViewCell {
     
     private let descriptionLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         label.numberOfLines = 0
         return label
     }()
     
     private let priceLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+        label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         label.numberOfLines = 0
         return label
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupBackgroundPosition()
-        setupPromotionImageViewPosition()
-        setupCheckmarkImageViewPosition()
-        setupTitleLabelPosition()
-        setupDescriptionLabelPosition()
-        setupPriceLabelPosition()
-        backgroundColor = .lightGray
+        setupCellView()
+        addCellSubviews()
+        setupCellConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -77,65 +73,69 @@ final class PromotionCollectionViewCell: UICollectionViewCell {
     func configureCell(with promotion: PromotionViewModel) {
         titleLabel.text = promotion.title
         priceLabel.text = promotion.price
-        guard let descriptionText = promotion.description else {
-            descriptionLabel.isHidden = true
-            return
-        }
-        descriptionLabel.text = descriptionText
+        descriptionLabel.text = promotion.description
     }
     
     func changeCheckmarkVisibility(isHidden: Bool) {
         checkmarkImageView.isHidden = isHidden
     }
     
-    private func setupBackgroundPosition() {
-        addSubview(background)
-        background.translatesAutoresizingMaskIntoConstraints = false
-        let width = UIScreen.main.bounds.width - layoutMargins.left * 2
-        NSLayoutConstraint.activate([
-            background.widthAnchor.constraint(equalToConstant: width),
-            background.topAnchor.constraint(equalTo: topAnchor),
-            background.bottomAnchor.constraint(equalTo: bottomAnchor),
-            background.leadingAnchor.constraint(equalTo: leadingAnchor),
-            background.trailingAnchor.constraint(equalTo: trailingAnchor)
-
-        ])
+    private func setupCellView() {
+        layer.cornerRadius = 8
+        backgroundColor = #colorLiteral(red: 0.9725490196, green: 0.9725490196, blue: 0.9725490196, alpha: 1)
+    }
+    
+    private func addCellSubviews() {
+        contentView.addSubview(promotionImageView)
+        contentView.addSubview(checkmarkImageView)
+        contentView.addSubview(titleLabel)
+        contentView.addSubview(descriptionLabel)
+        contentView.addSubview(priceLabel)
+    }
+    
+    private func setupCellConstraints() {
+        setupPromotionImageViewPosition()
+        setupCheckmarkImageViewPosition()
+        setupTitleLabelPosition()
+        setupDescriptionLabelPosition()
+        setupPriceLabelPosition()
     }
     
     private func setupPromotionImageViewPosition() {
-        addSubview(promotionImageView)
         promotionImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            promotionImageView.heightAnchor.constraint(equalToConstant: 52),
-            promotionImageView.widthAnchor.constraint(equalToConstant: 52),
-            promotionImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: layoutMargins.left),
-            promotionImageView.topAnchor.constraint(equalTo: topAnchor, constant: layoutMargins.top)
-        ])
-    }
-    
-    private func setupCheckmarkImageViewPosition() {
-        addSubview(checkmarkImageView)
-        checkmarkImageView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            checkmarkImageView.heightAnchor.constraint(equalToConstant: 24),
-            checkmarkImageView.widthAnchor.constraint(equalToConstant: 24),
-            checkmarkImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: layoutMargins.right),
-            checkmarkImageView.centerXAnchor.constraint(equalTo: promotionImageView.centerXAnchor)
+            promotionImageView.heightAnchor.constraint(equalToConstant: CellConstraints.promotionImageView),
+            promotionImageView.widthAnchor.constraint(equalToConstant: CellConstraints.promotionImageView),
+            promotionImageView.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor),
+            promotionImageView.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor)
         ])
     }
     
     private func setupTitleLabelPosition() {
-        addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        let titleLabelWidth = CellConstraints.screenWidth
+            - CellConstraints.promotionImageView
+            - CellConstraints.checkmarkImageView
+            - contentView.layoutMargins.left * 2 - 60
+        
         NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: promotionImageView.trailingAnchor, constant: 20),
-            titleLabel.trailingAnchor.constraint(equalTo: checkmarkImageView.leadingAnchor, constant: -20),
-            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: layoutMargins.top)
+            titleLabel.widthAnchor.constraint(equalToConstant: titleLabelWidth),
+            titleLabel.leadingAnchor.constraint(equalTo: promotionImageView.trailingAnchor, constant: 15),
+            titleLabel.trailingAnchor.constraint(equalTo: checkmarkImageView.leadingAnchor, constant: -15),
+            titleLabel.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor)
+        ])
+    }
+    
+    private func setupCheckmarkImageViewPosition() {
+        checkmarkImageView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            checkmarkImageView.heightAnchor.constraint(equalToConstant: CellConstraints.checkmarkImageView),
+            checkmarkImageView.widthAnchor.constraint(equalToConstant: CellConstraints.checkmarkImageView),
+            checkmarkImageView.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor, constant: 26)
         ])
     }
     
     private func setupDescriptionLabelPosition() {
-        addSubview(descriptionLabel)
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             descriptionLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
@@ -145,13 +145,12 @@ final class PromotionCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupPriceLabelPosition() {
-        addSubview(priceLabel)
         priceLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             priceLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
             priceLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
             priceLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 10),
-            priceLabel.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor, constant: 0)
+            priceLabel.bottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor)
         ])
     }
 }

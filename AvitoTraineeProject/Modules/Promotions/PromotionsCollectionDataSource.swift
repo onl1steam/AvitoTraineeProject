@@ -37,8 +37,8 @@ final class PromotionsCollectionDataSource: NSObject, UICollectionViewDataSource
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PromoCollectionViewCell.reuseIdentifier,
-                                                            for: indexPath) as? PromoCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PromotionCollectionViewCell.reuseIdentifier,
+                                                            for: indexPath) as? PromotionCollectionViewCell else {
             return UICollectionViewCell()
         }
         cell.configureCell(with: promotions[indexPath.row])
