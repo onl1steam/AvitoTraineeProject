@@ -9,6 +9,8 @@ import Foundation
 
 final class PromotionsConfigurator: PromotionsConfiguratorProtocol {
     
+    // MARK: - PromotionsConfiguratorProtocol
+    
     func configure(with viewController: PromotionsViewController) {
         let presenter = PromotionsPresenter(view: viewController)
         let interactor = PromotionsInteractor(presenter: presenter)

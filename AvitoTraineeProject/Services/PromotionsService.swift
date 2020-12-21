@@ -7,11 +7,14 @@
 
 import Foundation
 
+/// Сервис парсинга услуг по продвижению объявления
 protocol PromotionsServiceProtocol: class {
     func fetchPromotions(completion: @escaping (Result<PromotionsInfoResponse,Error>) -> Void)
 }
 
 final class PromotionsService: PromotionsServiceProtocol {
+    
+    // MARK: - PromotionsServiceProtocol Realization
     
     func fetchPromotions(completion: @escaping (Result<PromotionsInfoResponse,Error>) -> Void) {
         if let path = Bundle.main.path(forResource: "result", ofType: "json") {
@@ -23,6 +26,8 @@ final class PromotionsService: PromotionsServiceProtocol {
             }
         }
     }
+    
+    // MARK: - Private methods
     
     private func parsePromotions(from jsonData: Data,
                                  completion: @escaping (Result<PromotionsInfoResponse,Error>) -> Void) {

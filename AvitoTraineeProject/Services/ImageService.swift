@@ -7,14 +7,19 @@
 
 import Foundation
 
+/// Сервис загрузки изображений по ссылке
 protocol ImageServiceProtocol: class {
     func fetchImage(urlString: String, completion: @escaping (Result<Data, Error>) -> Void) -> URLSessionDataTask?
 }
 
 final class ImageService: ImageServiceProtocol {
     
+    // MARK: - Public properties
+    
     let session = URLSession(configuration: .ephemeral)
     var dataTask: URLSessionDataTask?
+    
+    // MARK: - ImageServiceProtocol Realization
     
     func fetchImage(urlString: String, completion: @escaping (Result<Data, Error>) -> Void) -> URLSessionDataTask? {
         guard let url = URL(string: urlString) else { return nil }

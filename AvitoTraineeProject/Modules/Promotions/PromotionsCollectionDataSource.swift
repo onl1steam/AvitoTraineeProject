@@ -5,17 +5,13 @@
 //  Created by Рыжков Артем on 21.12.2020.
 //
 
-import Foundation
-
 import UIKit
 
-/// DataSource для коллекции списка фильмов
-final class PromotionsCollectionDataSource: NSObject, UICollectionViewDataSource {
+final class PromotionsCollectionDataSource: NSObject {
     
-    // MARK: - Public Properties
+    // MARK: - Private Properties
     
     private var promotions = [PromotionViewModel]()
-    
     private let presenter: PromotionsPresenterProtocol
     
     // MARK: - Initializers
@@ -25,9 +21,16 @@ final class PromotionsCollectionDataSource: NSObject, UICollectionViewDataSource
         super.init()
     }
     
+    // MARK: - Public methods
+    
     func update(with promotionsList: [PromotionViewModel]) {
         self.promotions = promotionsList
     }
+}
+
+// MARK: - UICollectionViewDataSource
+
+extension PromotionsCollectionDataSource: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         promotions.count

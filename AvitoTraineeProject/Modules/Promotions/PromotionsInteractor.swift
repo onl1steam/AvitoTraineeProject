@@ -7,11 +7,15 @@
 
 import Foundation
 
-final class PromotionsInteractor: PromotionsInteractorProtocol {
+final class PromotionsInteractor {
+    
+    // MARK: - Public Properties
     
     weak var presenter: PromotionsPresenterProtocol!
     let promotionsService: PromotionsServiceProtocol
     let imageService: ImageServiceProtocol
+    
+    // MARK: - Initializers
     
     required init(presenter: PromotionsPresenterProtocol,
                   promotionsService: PromotionsServiceProtocol = PromotionsService(),
@@ -20,6 +24,11 @@ final class PromotionsInteractor: PromotionsInteractorProtocol {
         self.promotionsService = promotionsService
         self.imageService = imageService
     }
+}
+
+// MARK: - PromotionsInteractorProtocol
+
+extension PromotionsInteractor: PromotionsInteractorProtocol {
     
     func getPromotions(completion: @escaping (Result<PromotionsInfoResponse,Error>) -> Void) {
         promotionsService.fetchPromotions(completion: completion)

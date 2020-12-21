@@ -7,10 +7,14 @@
 
 import UIKit
 
-final class PromotionsViewController: UIViewController, PromotionsViewProtocol {
+final class PromotionsViewController: UIViewController {
+    
+    // MARK: - Public Properties
     
     var configurator: PromotionsConfiguratorProtocol = PromotionsConfigurator()
     var presenter: PromotionsPresenterProtocol!
+    
+    // MARK: - Private Properties
     
     private var selectedCell: PromotionCollectionViewCell?
     private var dataSource: PromotionsCollectionDataSource?
@@ -18,7 +22,10 @@ final class PromotionsViewController: UIViewController, PromotionsViewProtocol {
     private let closeButton: UIButton = {
         let button = UIButton()
         button.setBackgroundImage(UIImage(named: "CloseIconTemplate"), for: .normal)
+        button.setBackgroundImage(UIImage(named: "CloseIconTemplate"), for: .disabled)
+        button.isEnabled = false
         button.tintColor = .black
+        button.addTarget(nil, action: #selector(closeButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -39,10 +46,6 @@ final class PromotionsViewController: UIViewController, PromotionsViewProtocol {
         
         collection.register(PromotionCollectionViewCell.self,
                             forCellWithReuseIdentifier: PromotionCollectionViewCell.reuseIdentifier)
-        
-        // let nib = UINib(nibName: "PromoCollectionViewCell", bundle: nil)
-        // collection.register(nib, forCellWithReuseIdentifier: PromoCollectionViewCell.reuseIdentifier)
-        
         collection.showsHorizontalScrollIndicator = false
         collection.showsVerticalScrollIndicator = false
         collection.backgroundColor = .white
@@ -57,6 +60,8 @@ final class PromotionsViewController: UIViewController, PromotionsViewProtocol {
         button.addTarget(nil, action: #selector(chooseButtonTapped), for: .touchUpInside)
         return button
     }()
+    
+    // MARK: - UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,29 +81,17 @@ final class PromotionsViewController: UIViewController, PromotionsViewProtocol {
         presenter.configureView()
     }
     
-    func changeButtonTitle(_ title: String) {
-        chooseButton.setTitle(title, for: .normal)
-    }
-    
-    func updateCollectionView(with promotionList: [PromotionViewModel]) {
-        dataSource?.update(with: promotionList)
-        collectionView.reloadData()
-    }
-    
-    func setPromotionInfo(_ promotionInfo: PromotionInfoViewModel) {
-        titleLabel.text = promotionInfo.title
-        chooseButton.setTitle(promotionInfo.actionTitle, for: .normal)
-    }
-    
-    func showAlert(title: String, description: String) {
-        let alert = UIAlertController(title: title, message: description, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
+    // MARK: - Public methods
     
     @objc private func chooseButtonTapped() {
         presenter.chooseButtonTapped()
     }
+    
+    @objc private func closeButtonTapped() {
+        presenter.closeButtonTapped()
+    }
+    
+    // MARK: - Private Methods
     
     private func setupCloseButtonPosition() {
         view.addSubview(closeButton)
@@ -143,6 +136,33 @@ final class PromotionsViewController: UIViewController, PromotionsViewProtocol {
         ])
     }
 }
+
+// MARK: - PromotionsViewProtocol
+
+extension PromotionsViewController: PromotionsViewProtocol {
+    
+    func changeButtonTitle(_ title: String) {
+        chooseButton.setTitle(title, for: .normal)
+    }
+    
+    func updateCollectionView(with promotionList: [PromotionViewModel]) {
+        dataSource?.update(with: promotionList)
+        collectionView.reloadData()
+    }
+    
+    func setPromotionInfo(_ promotionInfo: PromotionInfoViewModel) {
+        titleLabel.text = promotionInfo.title
+        chooseButton.setTitle(promotionInfo.actionTitle, for: .normal)
+    }
+    
+    func showAlert(title: String, description: String) {
+        let alert = UIAlertController(title: title, message: description, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+}
+
+// MARK: - UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
 
 extension PromotionsViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
     

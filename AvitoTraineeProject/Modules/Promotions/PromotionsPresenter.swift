@@ -7,7 +7,9 @@
 
 import Foundation
 
-final class PromotionsPresenter: PromotionsPresenterProtocol {
+final class PromotionsPresenter {
+    
+    // MARK: - Public Properties
     
     weak var view: PromotionsViewProtocol!
     var interactor: PromotionsInteractorProtocol!
@@ -16,6 +18,8 @@ final class PromotionsPresenter: PromotionsPresenterProtocol {
     var promotionInfo: PromotionInfoViewModel?
     var promotions: [PromotionViewModel] = []
     var selectedPromoNumber: Int?
+    
+    // MARK: - Initializers
     
     required init(view: PromotionsViewProtocol) {
         self.view = view
@@ -28,6 +32,29 @@ final class PromotionsPresenter: PromotionsPresenterProtocol {
             }
         }
     }
+    
+    // MARK: - Private methods
+    
+    private func makePromotionViewModel(from promotions: [Promotion]) -> [PromotionViewModel] {
+        return promotions.map { promotion -> PromotionViewModel in
+            return PromotionViewModel(id: promotion.id,
+                                      title: promotion.title,
+                                      description: promotion.description,
+                                      iconUrl: promotion.icon.icon52Url,
+                                      price: promotion.price)
+        }
+    }
+    
+    private func makePromotioInfoViewModel(from promotionsInfo: PromotionsInfoResponse) -> PromotionInfoViewModel {
+        return PromotionInfoViewModel(title: promotionsInfo.title,
+                                      actionTitle: promotionsInfo.actionTitle,
+                                      selectedActionTitle: promotionsInfo.selectedActionTitle)
+    }
+}
+
+// MARK: - PromotionsPresenterProtocol
+
+extension PromotionsPresenter: PromotionsPresenterProtocol {
     
     func configureView() {
         interactor.getPromotions { [weak self] promotionsInfo in
@@ -64,27 +91,15 @@ final class PromotionsPresenter: PromotionsPresenterProtocol {
         view.showAlert(title: "Выбор услуги", description: "Выбрана услуга: \(promotions[number].title).")
     }
     
+    func closeButtonTapped() {
+        router.closeCurrentViewController()
+    }
+    
     func getPromotionsCount() -> Int {
         promotions.count
     }
     
     func getPromotion(for row: Int) -> PromotionViewModel {
         promotions[row]
-    }
-    
-    private func makePromotionViewModel(from promotions: [Promotion]) -> [PromotionViewModel] {
-        return promotions.map { promotion -> PromotionViewModel in
-            return PromotionViewModel(id: promotion.id,
-                                      title: promotion.title,
-                                      description: promotion.description,
-                                      iconUrl: promotion.icon.icon52Url,
-                                      price: promotion.price)
-        }
-    }
-    
-    private func makePromotioInfoViewModel(from promotionsInfo: PromotionsInfoResponse) -> PromotionInfoViewModel {
-        return PromotionInfoViewModel(title: promotionsInfo.title,
-                                      actionTitle: promotionsInfo.actionTitle,
-                                      selectedActionTitle: promotionsInfo.selectedActionTitle)
     }
 }

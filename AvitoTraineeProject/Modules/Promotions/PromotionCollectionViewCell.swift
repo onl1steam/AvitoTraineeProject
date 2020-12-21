@@ -9,13 +9,20 @@ import UIKit
 
 final class PromotionCollectionViewCell: UICollectionViewCell, CollectionViewReusableCell {
     
+    // MARK: - Types
+    
     private enum CellConstraints {
+        // MARK: - Constants
         static let promotionImageView: CGFloat = 52
         static let checkmarkImageView: CGFloat = 24
         static let screenWidth: CGFloat = UIScreen.main.bounds.width
     }
     
+    // MARK: - Public Properties
+    
     var dataTask: URLSessionDataTask?
+    
+    // MARK: - Private Properties
     
     private let promotionImageView: UIImageView = {
         let imageView = UIImageView()
@@ -50,6 +57,8 @@ final class PromotionCollectionViewCell: UICollectionViewCell, CollectionViewReu
         return label
     }()
     
+    // MARK: - Initializers
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupCellView()
@@ -61,10 +70,14 @@ final class PromotionCollectionViewCell: UICollectionViewCell, CollectionViewReu
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - UICollectionViewCell
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         dataTask?.cancel()
     }
+    
+    // MARK: - Public methods
     
     func setImage(_ image: UIImage?) {
         promotionImageView.image = image
@@ -79,6 +92,8 @@ final class PromotionCollectionViewCell: UICollectionViewCell, CollectionViewReu
     func changeCheckmarkVisibility(isHidden: Bool) {
         checkmarkImageView.isHidden = isHidden
     }
+    
+    // MARK: - Private Methods
     
     private func setupCellView() {
         layer.cornerRadius = 8
@@ -116,7 +131,7 @@ final class PromotionCollectionViewCell: UICollectionViewCell, CollectionViewReu
         let titleLabelWidth = CellConstraints.screenWidth
             - CellConstraints.promotionImageView
             - CellConstraints.checkmarkImageView
-            - contentView.layoutMargins.left * 2 - 60
+            - contentView.layoutMargins.left * 2 - 70
         
         NSLayoutConstraint.activate([
             titleLabel.widthAnchor.constraint(equalToConstant: titleLabelWidth),
